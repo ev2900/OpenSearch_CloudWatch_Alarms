@@ -21,7 +21,5 @@
 | ThreadpoolSearchQueue      | Average   | 1               | >= 500    | 1 out of 1          |
 | ThreadpoolSearchQueue      | Maximum   | 1               | >= 5000   | 1 out of 1          |
 
-Deploying the CloudFormation Stack in repository will create CloudWatch Alarms for these metrics.
-
-To deploy these CloudWatch alarms click the button below
+Deploying the CloudFormation Stack in repository will create CloudWatch Alarms for these metrics. To deploy these CloudWatch alarms click the button below
 
