@@ -10,4 +10,13 @@
 | AutomatedSnapshotFailure   | Maximum   | 1               | >= 1      | 15 out of 15        |
 | CPUUtilization             | Maximum   | 15              | >= 80%    | 15 out of 15        |
 | JVMMemoryPressure          | Maximum   | 5               | >= 80%    | 3 out of 3          |
-| MasterCPUUtilization
+| MasterCPUUtilization       | Maximum   | 15              | >= 50%    | 3 out of 3          |
+| MasterJVMMemoryPressure    | Maximum   | 15              | >= 80%    | 1 out of 1          |
+| KMSKeyError                |           | 1               |           | 1 out of 1          |
+| KMSKeyInaccessible         |           | 1               |           | 1 out of 1          |
+| shards.active              |           | 1               | >= 30000  | 1 out of 1          | 
+| 5xx alarms                 |           | 
+| MasterReachableFromNode    |           | 
+| ThreadpoolWriteQueue       | Average   | 
+| ThreadpoolSearchQueue      | Average   | 
+| ThreadpoolSearchQueue      | Maximum   | 
