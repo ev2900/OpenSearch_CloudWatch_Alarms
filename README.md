@@ -12,11 +12,16 @@
 | JVMMemoryPressure          | Maximum   | 5               | >= 80%    | 3 out of 3          |
 | MasterCPUUtilization       | Maximum   | 15              | >= 50%    | 3 out of 3          |
 | MasterJVMMemoryPressure    | Maximum   | 15              | >= 80%    | 1 out of 1          |
-| KMSKeyError                |           | 1               |           | 1 out of 1          |
-| KMSKeyInaccessible         |           | 1               |           | 1 out of 1          |
+| KMSKeyError                |           | 1               | >= 1      | 1 out of 1          |
+| KMSKeyInaccessible         |           | 1               | >= 1      | 1 out of 1          |
 | shards.active              |           | 1               | >= 30000  | 1 out of 1          | 
-| 5xx alarms                 |           | 
-| MasterReachableFromNode    |           | 
-| ThreadpoolWriteQueue       | Average   | 
-| ThreadpoolSearchQueue      | Average   | 
-| ThreadpoolSearchQueue      | Maximum   | 
+| 5xx alarms                 |           |                 |           | 1 out of 1          |
+| MasterReachableFromNode    |           | 24              | < 1       | 1 out of 1          |
+| ThreadpoolWriteQueue       | Average   | 1               | >= 100    | 1 out of 1          |
+| ThreadpoolSearchQueue      | Average   | 1               | >= 500    | 1 out of 1          |
+| ThreadpoolSearchQueue      | Maximum   | 1               | >= 5000   | 1 out of 1          |
+
+Deploying the CloudFormation Stack in repository will create CloudWatch Alarms for these metrics.
+
+To deploy these CloudWatch alarms click the button below
+
