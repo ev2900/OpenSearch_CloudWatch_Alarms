@@ -1,0 +1,147 @@
+Description: This template will an OpenSearch Demo with SNSTopic and other parts required for alerting
+
+Parameters:
+  EmailParameter:
+    Type: String
+    Description: 'Email to send alerts to'
+  OpenSearhcClusterNameParameter:
+    Type: String
+    Description: 'Name of OpenSearch domain'
+    
+Resources:
+  # -----------------
+  # SNS Topic
+  # ----------------- 
+  SNSTopic:
+    Type: AWS::SNS::Topic
+    Properties: 
+      DisplayName: 'os-alert-topic'
+      FifoTopic: False
+      TopicName: 'os-alert-topic'
+
+  # -----------------
+  # SNS Subscription
+  # -----------------
+  SNSSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref SNSTopic
+      Protocol: 'email'
+      Endpoint:
+        Ref: EmailParameter
+
+  # -----------------
+  # CloudWatch Alarm - ClusterStatus.red
+  # -----------------
+  ClusterStatusRed:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ClusterStatus.red >= 1'
+      AlarmDescription: 'Email when ClusterStatus.red >=1, 1 time within 1 min'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'ClusterStatus.red'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 1
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
+
+  # -----------------
+  # CloudWatch Alarm - ClusterStatus.yellow
+  # -----------------
+  ClusterStatusYellow:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ClusterStatus.yellow >= 1'
+      AlarmDescription: 'Email when ClusterStatus.yellow >=1, 1 time within 1 min'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'ClusterStatus.yellow'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 1
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
+
+  # -----------------
+  # CloudWatch Alarm - FreeStorageSpace
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - ClusterIndexWritesBlocked
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - AutomatedSnapshotFailure
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - CPUUtilization
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - JVMMemoryPressure
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - MasterCPUUtilization
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - MasterJVMMemoryPressure
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - KMSKeyError
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - KMSKeyInaccessible
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - shards.active
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - 5xx alarms
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - MasterReachableFromNode
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - ThreadpoolWriteQueue
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - ThreadpoolSearchQueue
+  # -----------------
+
+  # -----------------
+  # CloudWatch Alarm - ThreadpoolSearchQueue
+  # -----------------
