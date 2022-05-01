@@ -12,11 +12,11 @@
 | JVMMemoryPressure          | Maximum   | 300             | GreaterThanOrEqualToThreshold | 80        | 3                 |
 | MasterCPUUtilization       | Maximum   | 900             | GreaterThanOrEqualToThreshold | 50        | 3                 |
 | MasterJVMMemoryPressure    | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 1                 |
-| KMSKeyError                |           | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| KMSKeyInaccessible         |           | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| KMSKeyError                | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| KMSKeyInaccessible         | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | shards.active              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |  
 | 5xx alarms                 |           |                 |                               |           | 1                 |
-| MasterReachableFromNode    |           | 86400           | < 1                           | 1         | 1                 |
+| MasterReachableFromNode    | Maximum   | 86400           | GreaterThanThreshold          | 1         | 1                 |
 | ThreadpoolWriteQueue       | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
 | ThreadpoolSearchQueue      | Average   | 60              | GreaterThanOrEqualToThreshold | 500       | 1                 |
 | ThreadpoolSearchQueue      | Maximum   | 60              | GreaterThanOrEqualToThreshold | 5000      | 1                 |
