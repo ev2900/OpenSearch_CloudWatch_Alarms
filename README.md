@@ -17,7 +17,7 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 | FreeStorageSpace           | Minimum   | 60              | LessThanOrEqualToThreshold    | 20480     | 1                 |
 | ClusterIndexWritesBlocked  | Maximum   | 300             | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | AutomatedSnapshotFailure   | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| CPUUtilization             | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 15                |
+| CPUUtilization             | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 3                 |
 | JVMMemoryPressure          | Maximum   | 300             | GreaterThanOrEqualToThreshold | 80        | 3                 |
 | MasterCPUUtilization       | Maximum   | 900             | GreaterThanOrEqualToThreshold | 50        | 3                 |
 | MasterJVMMemoryPressure    | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 1                 |
