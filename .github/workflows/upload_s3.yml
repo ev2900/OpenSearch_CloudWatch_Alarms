@@ -1,0 +1,32 @@
+name: Upload files to S3
+
+on:
+  # Triggers the workflow on push
+  push:
+    branches: [ main ]
+  
+  # Allows the workflow to be run manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Upload to S3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          
+      - name: Upload OpenSearch_cloudwatch_alarms.yaml to S3
+        run: aws s3 cp /home/runner/work/OpenSearch_CloudWatch_Alarms/OpenSearch_CloudWatch_Alarms/OpenSearch_cloudwatch_alarms.yaml s3://sharkech-public/misc-public/OpenSearch_cloudwatch_alarms.yaml
