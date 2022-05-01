@@ -14,7 +14,7 @@
 | MasterJVMMemoryPressure    | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 1                 |
 | KMSKeyError                | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | KMSKeyInaccessible         | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| shards.active              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |  
+| Shards.active              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |  
 | 5xx alarms                 |           |                 |                               |           | 1                 |
 | MasterReachableFromNode    | Maximum   | 86400           | LessThanThreshold             | 1         | 1                 |
 | ThreadpoolWriteQueue       | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
