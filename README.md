@@ -16,7 +16,7 @@
 | KMSKeyInaccessible         | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | shards.active              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |  
 | 5xx alarms                 |           |                 |                               |           | 1                 |
-| MasterReachableFromNode    | Maximum   | 86400           | GreaterThanThreshold          | 1         | 1                 |
+| MasterReachableFromNode    | Maximum   | 86400           | LessThanThreshold             | 1         | 1                 |
 | ThreadpoolWriteQueue       | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
 | ThreadpoolSearchQueue      | Average   | 60              | GreaterThanOrEqualToThreshold | 500       | 1                 |
 | ThreadpoolSearchQueue      | Maximum   | 60              | GreaterThanOrEqualToThreshold | 5000      | 1                 |
