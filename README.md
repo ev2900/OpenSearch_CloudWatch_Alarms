@@ -1,5 +1,14 @@
 # OpenSearch CloudWatch Alarms
-[AWS documention](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cloudwatch-alarms.html) recomends the following CloudWatch alarms to monitor an OpenSearch domain
+
+Deploying the CloudFormation Stack in this repository will create CloudWatch Alarms - that will trigger email alerts via. SNS notification - for the metrics documented in the table below. 
+
+To deploy the CloudWatch alarms click the button 
+
+[![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=open-search-demo-cloud9-simple&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/OpenSearch_demo_Cloud9_simple.yaml)
+
+When prompted by CloudFormation enter the name of the OpenSearch domain to monitor and the email address you want notifications to be send to
+
+[AWS documention](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cloudwatch-alarms.html) recomends these CloudWatch alarms as a means of monitoring an OpenSearch domain
 
 | Metric name                | Statistic | Period (second) | ComparisonOperator            | Threshold | EvaluationPeriods |
 |----------------------------|-----------|-----------------| ------------------------------|-----------|-------------------|
@@ -20,6 +29,3 @@
 | ThreadpoolWriteQueue       | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
 | ThreadpoolSearchQueue      | Average   | 60              | GreaterThanOrEqualToThreshold | 500       | 1                 |
 | ThreadpoolSearchQueue      | Maximum   | 60              | GreaterThanOrEqualToThreshold | 5000      | 1                 |
-
-Deploying the CloudFormation Stack in repository will create CloudWatch Alarms for these metrics. To deploy these CloudWatch alarms click the button below
-
