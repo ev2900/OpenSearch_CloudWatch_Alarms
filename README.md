@@ -4,7 +4,7 @@ Deploying the CloudFormation Stack in this repository will create CloudWatch Ala
 
 To deploy the CloudWatch alarms click the button 
 
-[![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=open-search-demo-cloud9-simple&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/OpenSearch_demo_Cloud9_simple.yaml)
+[![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=open-search-cloudwatch-alarms&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/OpenSearch_cloudwatch_alarms.yaml)
 
 When prompted by CloudFormation enter the name of the OpenSearch domain to monitor and the email address you want notifications to be send to
 
