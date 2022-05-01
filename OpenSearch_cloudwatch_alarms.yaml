@@ -178,7 +178,7 @@ Resources:
     Properties:
       # Alarm name + description
       AlarmName: 'CPUUtilization >= 80'
-      AlarmDescription: 'Email when CPUUtilization >=80, 15 time within 15 minutes'
+      AlarmDescription: 'Email when CPUUtilization >=80, 3 time within 15 minutes'
       # Acount + cluster
       Namespace: 'AWS/ES'
       Dimensions:
@@ -193,7 +193,7 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold   
       Threshold: 80
       Period: 900
-      EvaluationPeriods: 15
+      EvaluationPeriods: 3
       # Action
       AlarmActions:
         - !Ref SNSTopic
