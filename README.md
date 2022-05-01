@@ -7,7 +7,7 @@
 | ClusterStatus.yellow       | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | FreeStorageSpace           | Minimum   | 60              | LessThanOrEqualToThreshold    | 20480     | 1                 |
 | ClusterIndexWritesBlocked  | Maximum   | 300             | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| AutomatedSnapshotFailure   | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 15                |
+| AutomatedSnapshotFailure   | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | CPUUtilization             | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 15                |
 | JVMMemoryPressure          | Maximum   | 300             | GreaterThanOrEqualToThreshold | 80        | 3                 |
 | MasterCPUUtilization       | Maximum   | 900             | GreaterThanOrEqualToThreshold | 50        | 3                 |
