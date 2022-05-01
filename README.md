@@ -14,7 +14,7 @@
 | MasterJVMMemoryPressure    | Maximum   | 15              | >= 80%    | 1 out of 1          |
 | KMSKeyError                |           | 1               | >= 1      | 1 out of 1          |
 | KMSKeyInaccessible         |           | 1               | >= 1      | 1 out of 1          |
-| shards.active              |           | 1               | >= 30000  | 1 out of 1          | 
+| shards.active              | Maximum   | 1               | >= 30000  | 1 out of 1          | 
 | 5xx alarms                 |           |                 |           | 1 out of 1          |
 | MasterReachableFromNode    |           | 24              | < 1       | 1 out of 1          |
 | ThreadpoolWriteQueue       | Average   | 1               | >= 100    | 1 out of 1          |
