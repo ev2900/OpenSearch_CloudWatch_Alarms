@@ -38,7 +38,7 @@ Resources:
     Properties:
       # Alarm name + description
       AlarmName: 'ClusterStatus.red >= 1'
-      AlarmDescription: 'Email when ClusterStatus.red >=1, 1 time within 1 min'
+      AlarmDescription: 'Email when ClusterStatus.red >=1, 1 time within 1 minutes'
       # Acount + cluster
       Namespace: 'AWS/ES'
       Dimensions:
@@ -66,7 +66,7 @@ Resources:
     Properties:
       # Alarm name + description
       AlarmName: 'ClusterStatus.yellow >= 1'
-      AlarmDescription: 'Email when ClusterStatus.yellow >=1, 1 time within 1 min'
+      AlarmDescription: 'Email when ClusterStatus.yellow >=1, 1 time within 1 minute'
       # Acount + cluster
       Namespace: 'AWS/ES'
       Dimensions:
@@ -89,42 +89,282 @@ Resources:
   # -----------------
   # CloudWatch Alarm - FreeStorageSpace
   # -----------------
+  FreeStorageSpace:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'FreeStorageSpace <= 20480'
+      AlarmDescription: 'Email when FreeStorageSpace <= 20480, 1 time within 1 minute'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Minimum
+      MetricName: 'FreeStorageSpace'
+      ComparisonOperator: LessThanOrEqualToThreshold   
+      Threshold: 20480
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - ClusterIndexWritesBlocked
   # -----------------
+  ClusterIndexWritesBlocked:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ClusterIndexWritesBlocked >= 1'
+      AlarmDescription: 'Email when ClusterIndexWritesBlocked >=1, 1 time within 5 minutes'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'ClusterIndexWritesBlocked'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 1
+      Period: 300
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - AutomatedSnapshotFailure
   # -----------------
+  AutomatedSnapshotFailure:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'AutomatedSnapshotFailure >= 1'
+      AlarmDescription: 'Email when AutomatedSnapshotFailure >=1, 1 time within 1 minute'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'AutomatedSnapshotFailure'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 1
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - CPUUtilization
   # -----------------
+  CPUUtilization:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'CPUUtilization >= 80'
+      AlarmDescription: 'Email when CPUUtilization >=80, 15 time within 15 minutes'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'CPUUtilization'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 80
+      Period: 900
+      EvaluationPeriods: 15
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - JVMMemoryPressure
   # -----------------
+  JVMMemoryPressure:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'JVMMemoryPressure >= 80'
+      AlarmDescription: 'Email when JVMMemoryPressure >= 80, 3 time within 5 minutes'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'JVMMemoryPressure'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 80
+      Period: 300
+      EvaluationPeriods: 3
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - MasterCPUUtilization
   # -----------------
+  MasterCPUUtilization:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'MasterCPUUtilization >= 50'
+      AlarmDescription: 'Email when MasterCPUUtilization >= 50, 3 time within 15 minutes'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'MasterCPUUtilization'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 50
+      Period: 900
+      EvaluationPeriods: 3
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - MasterJVMMemoryPressure
   # -----------------
+  MasterJVMMemoryPressure:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'MasterJVMMemoryPressure >= 80'
+      AlarmDescription: 'Email when MasterJVMMemoryPressure >= 80, 1 time within 15 minutes'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'MasterJVMMemoryPressure'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 80
+      Period: 900
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - KMSKeyError
   # -----------------
+  KMSKeyError:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'KMSKeyError >= 1'
+      AlarmDescription: 'Email when KMSKeyError >= 1, 1 time within 1 minute'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'KMSKeyError'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 1
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - KMSKeyInaccessible
   # -----------------
+  KMSKeyInaccessible:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'KMSKeyInaccessible >= 1'
+      AlarmDescription: 'Email when KMSKeyInaccessible >= 1, 1 time within 1 minute'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'KMSKeyInaccessible'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 1
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
-  # CloudWatch Alarm - shards.active
+  # CloudWatch Alarm - Shards.active
   # -----------------
+  ShardsActive:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ShardsActive >= 30000'
+      AlarmDescription: 'Email when ShardsActive >= 30000, 1 time within 1 minute'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'Shards.active'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 30000
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - 5xx alarms
@@ -133,15 +373,111 @@ Resources:
   # -----------------
   # CloudWatch Alarm - MasterReachableFromNode
   # -----------------
+  MasterReachableFromNode:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'MasterReachableFromNode < 1'
+      AlarmDescription: 'Email when MasterReachableFromNode < 1, 1 time within 1 day'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'MasterReachableFromNode'
+      ComparisonOperator: LessThanThreshold   
+      Threshold: 1
+      Period: 86400
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - ThreadpoolWriteQueue
   # -----------------
+  ThreadpoolWriteQueue:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ThreadpoolWriteQueue average >= 100'
+      AlarmDescription: 'Email when average ThreadpoolWriteQueue >= 100, 1 time within 1 minute'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Average
+      MetricName: 'ThreadpoolWriteQueue'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 100
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - ThreadpoolSearchQueue
   # -----------------
+  ThreadpoolSearchQueue500:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ThreadpoolSearchQueue average >= 500'
+      AlarmDescription: 'Email when average ThreadpoolSearchQueue >= 500, 1 time within 1 minute'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Average
+      MetricName: 'ThreadpoolSearchQueue'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 500
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
 
   # -----------------
   # CloudWatch Alarm - ThreadpoolSearchQueue
   # -----------------
+  ThreadpoolSearchQueue5000:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ThreadpoolSearchQueue >= 5000'
+      AlarmDescription: 'Email when ThreadpoolSearchQueue >= 5000, 1 time within 1 minute'
+      # Acount + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearhcClusterNameParameter
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'ThreadpoolSearchQueue'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 5000
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      AlarmActions:
+        - !Ref SNSTopic
