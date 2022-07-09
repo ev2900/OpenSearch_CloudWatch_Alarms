@@ -39,7 +39,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'ClusterStatus.red >= 1'
       AlarmDescription: 'Email when ClusterStatus.red >=1, 1 time within 1 minutes'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -69,7 +69,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'ClusterStatus.yellow >= 1'
       AlarmDescription: 'Email when ClusterStatus.yellow >=1, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -99,7 +99,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'FreeStorageSpace <= 20480'
       AlarmDescription: 'Email when FreeStorageSpace <= 20480, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -129,7 +129,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'ClusterIndexWritesBlocked >= 1'
       AlarmDescription: 'Email when ClusterIndexWritesBlocked >=1, 1 time within 5 minutes'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -159,7 +159,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'AutomatedSnapshotFailure >= 1'
       AlarmDescription: 'Email when AutomatedSnapshotFailure >=1, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -189,7 +189,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'CPUUtilization >= 80'
       AlarmDescription: 'Email when CPUUtilization >=80, 3 time within 15 minutes'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -219,7 +219,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'JVMMemoryPressure >= 80'
       AlarmDescription: 'Email when JVMMemoryPressure >= 80, 3 time within 5 minutes'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -249,7 +249,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'MasterCPUUtilization >= 50'
       AlarmDescription: 'Email when MasterCPUUtilization >= 50, 3 time within 15 minutes'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -279,7 +279,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'MasterJVMMemoryPressure >= 80'
       AlarmDescription: 'Email when MasterJVMMemoryPressure >= 80, 1 time within 15 minutes'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -309,7 +309,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'KMSKeyError >= 1'
       AlarmDescription: 'Email when KMSKeyError >= 1, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -339,7 +339,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'KMSKeyInaccessible >= 1'
       AlarmDescription: 'Email when KMSKeyInaccessible >= 1, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -369,7 +369,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'ShardsActive >= 30000'
       AlarmDescription: 'Email when ShardsActive >= 30000, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -403,7 +403,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'MasterReachableFromNode < 1'
       AlarmDescription: 'Email when MasterReachableFromNode < 1, 1 time within 1 day'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -433,7 +433,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'ThreadpoolWriteQueue average >= 100'
       AlarmDescription: 'Email when average ThreadpoolWriteQueue >= 100, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -463,7 +463,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'ThreadpoolSearchQueue average >= 500'
       AlarmDescription: 'Email when average ThreadpoolSearchQueue >= 500, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
@@ -493,7 +493,7 @@ Resources:
       # Alarm name + description
       AlarmName: 'ThreadpoolSearchQueue >= 5000'
       AlarmDescription: 'Email when ThreadpoolSearchQueue >= 5000, 1 time within 1 minute'
-      # Acount + cluster
+      # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
         - Name: ClientId
