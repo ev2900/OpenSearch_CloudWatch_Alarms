@@ -1,13 +1,29 @@
 Description: This template will an OpenSearch Demo with SNSTopic and other parts required for alerting
 
 Parameters:
-  EmailParameter:
+  Email:
     Type: String
     Description: 'Email to send alerts to'
-  OpenSearchClusterNameParameter:
+  OpenSearchClusterName:
     Type: String
     Description: 'Name of OpenSearch domain'
+  IsOldGenInstancesMasterNode:
+    Type: String
+    Description: Are the master nodes previous generation instances? Select true if they are previous generation instances. Select false if they are current generation instances
+    AllowedValues:
+      - true
+      - false
+  IsOldGenInstancesDataNode:
+    Type: String
+    Description: Are the data nodes previous generation instances? Select true if they are previous generation instances. Select false if they are current generation instances
+    AllowedValues:
+      - true
+      - false
     
+Conditions:
+  OldGenInstancesMasterNode: !Equals [!Ref IsOldGenInstancesMasterNode, true]
+  OldGenInstancesDataNode: !Equals [!Ref IsOldGenInstancesDataNode, true]
+
 Resources:
   # -----------------
   # SNS Topic
@@ -28,7 +44,7 @@ Resources:
       TopicArn: !Ref SNSTopic
       Protocol: 'email'
       Endpoint:
-        Ref: EmailParameter
+        Ref: Email
 
   # -----------------
   # CloudWatch Alarm - ClusterStatus.red
@@ -46,7 +62,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'ClusterStatus.red'
@@ -76,7 +92,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'ClusterStatus.yellow'
@@ -106,7 +122,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Minimum
       MetricName: 'FreeStorageSpace'
@@ -136,7 +152,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'ClusterIndexWritesBlocked'
@@ -166,7 +182,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'AutomatedSnapshotFailure'
@@ -196,7 +212,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'CPUUtilization'
@@ -217,8 +233,8 @@ Resources:
     Type: AWS::CloudWatch::Alarm
     Properties:
       # Alarm name + description
-      AlarmName: 'JVMMemoryPressure >= 80'
-      AlarmDescription: 'Email when JVMMemoryPressure >= 80, 3 time within 5 minutes'
+      AlarmName: 'JVMMemoryPressure >= 80 (old gen instance) / 95 (current gen instance)'
+      AlarmDescription: 'Email when JVMMemoryPressure >= 80 (old gen instance) / 95 (current gen instance), 3 time within 5 minutes'
       # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
@@ -226,12 +242,12 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'JVMMemoryPressure'
       ComparisonOperator: GreaterThanOrEqualToThreshold   
-      Threshold: 80
+      Threshold: !If [OldGenInstancesDataNode, 80, 95]
       Period: 300
       EvaluationPeriods: 3
       # Action
@@ -256,7 +272,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'MasterCPUUtilization'
@@ -277,8 +293,8 @@ Resources:
     Type: AWS::CloudWatch::Alarm
     Properties:
       # Alarm name + description
-      AlarmName: 'MasterJVMMemoryPressure >= 80'
-      AlarmDescription: 'Email when MasterJVMMemoryPressure >= 80, 1 time within 15 minutes'
+      AlarmName: 'MasterJVMMemoryPressure >= 80 (old gen instance) / 95 (current gen instance)'
+      AlarmDescription: 'Email when MasterJVMMemoryPressure >= 80 (old gen instance) / 95 (current gen instance), 1 time within 15 minutes'
       # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
@@ -286,12 +302,12 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'MasterJVMMemoryPressure'
       ComparisonOperator: GreaterThanOrEqualToThreshold   
-      Threshold: 80
+      Threshold: !If [OldGenInstancesMasterNode, 80, 95]
       Period: 900
       EvaluationPeriods: 1
       # Action
@@ -316,7 +332,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'KMSKeyError'
@@ -346,7 +362,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'KMSKeyInaccessible'
@@ -376,7 +392,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'Shards.active'
@@ -410,7 +426,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'MasterReachableFromNode'
@@ -440,7 +456,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Average
       MetricName: 'ThreadpoolWriteQueue'
@@ -470,7 +486,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Average
       MetricName: 'ThreadpoolSearchQueue'
@@ -500,7 +516,7 @@ Resources:
           Value: !Ref AWS::AccountId
         - Name: DomainName
           Value: 
-            Ref: OpenSearchClusterNameParameter
+            Ref: OpenSearchClusterName
       # Conditions
       Statistic: Maximum
       MetricName: 'ThreadpoolSearchQueue'
