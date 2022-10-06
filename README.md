@@ -10,21 +10,23 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 
 [AWS documention](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cloudwatch-alarms.html) recomends these CloudWatch alarms as a means of monitoring an OpenSearch domain
 
-| Metric name                | Statistic | Period (second) | ComparisonOperator            | Threshold | EvaluationPeriods |
-|----------------------------|-----------|-----------------| ------------------------------|-----------|-------------------|
-| ClusterStatus.red          | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 | 
-| ClusterStatus.yellow       | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| FreeStorageSpace           | Minimum   | 60              | LessThanOrEqualToThreshold    | 20480     | 1                 |
-| ClusterIndexWritesBlocked  | Maximum   | 300             | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| AutomatedSnapshotFailure   | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| CPUUtilization             | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 3                 |
-| JVMMemoryPressure          | Maximum   | 300             | GreaterThanOrEqualToThreshold | 80        | 3                 |
-| MasterCPUUtilization       | Maximum   | 900             | GreaterThanOrEqualToThreshold | 50        | 3                 |
-| MasterJVMMemoryPressure    | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 1                 |
-| KMSKeyError                | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| KMSKeyInaccessible         | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| Shards.active              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |  
-| MasterReachableFromNode    | Maximum   | 86400           | LessThanThreshold             | 1         | 1                 |
-| ThreadpoolWriteQueue       | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
-| ThreadpoolSearchQueue      | Average   | 60              | GreaterThanOrEqualToThreshold | 500       | 1                 |
-| ThreadpoolSearchQueue      | Maximum   | 60              | GreaterThanOrEqualToThreshold | 5000      | 1                 |
+| Metric name                    | Statistic | Period (second) | ComparisonOperator            | Threshold | EvaluationPeriods |
+|--------------------------------|-----------|-----------------| ------------------------------|-----------|-------------------|
+| ClusterStatus.red              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 | 
+| ClusterStatus.yellow           | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| FreeStorageSpace               | Minimum   | 60              | LessThanOrEqualToThreshold    | 20480     | 1                 |
+| ClusterIndexWritesBlocked      | Maximum   | 300             | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| AutomatedSnapshotFailure       | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| CPUUtilization                 | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 3                 |
+| JVMMemoryPressure              | Maximum   | 300             | GreaterThanOrEqualToThreshold | 95        | 3                 |
+| OldGenJVMMemoryPressure        | Maximum   | 300             | GreaterThanOrEqualToThreshold | 80        | 3                 |
+| MasterCPUUtilization           | Maximum   | 900             | GreaterThanOrEqualToThreshold | 50        | 3                 |
+| MasterJVMMemoryPressure        | Maximum   | 900             | GreaterThanOrEqualToThreshold | 95        | 1                 |
+| OldGenMasterJVMMemoryPressure  | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 1                 |
+| KMSKeyError                    | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| KMSKeyInaccessible             | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| Shards.active                  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |  
+| MasterReachableFromNode        | Maximum   | 86400           | LessThanThreshold             | 1         | 1                 |
+| ThreadpoolWriteQueue           | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
+| ThreadpoolSearchQueue          | Average   | 60              | GreaterThanOrEqualToThreshold | 500       | 1                 |
+| ThreadpoolSearchQueue          | Maximum   | 60              | GreaterThanOrEqualToThreshold | 5000      | 1                 |
