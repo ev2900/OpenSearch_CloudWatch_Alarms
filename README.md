@@ -30,3 +30,5 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 | ThreadpoolWriteQueue           | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
 | ThreadpoolSearchQueue          | Average   | 60              | GreaterThanOrEqualToThreshold | 500       | 1                 |
 | ThreadpoolSearchQueue          | Maximum   | 60              | GreaterThanOrEqualToThreshold | 5000      | 1                 |
+| ThreadpoolWriteRejected        | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| ThreadpoolSearchRejected       | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
