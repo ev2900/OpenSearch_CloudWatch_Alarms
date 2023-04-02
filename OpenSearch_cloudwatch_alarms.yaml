@@ -529,3 +529,63 @@ Resources:
         - !Ref SNSTopic
       AlarmActions:
         - !Ref SNSTopic
+        
+  # -----------------
+  # CloudWatch Alarm - ThreadpoolWriteRejected
+  # -----------------
+  ThreadpoolWriteRejected:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ThreadpoolWriteRejected >= 1'
+      AlarmDescription: 'Email when ThreadpoolWriteRejected >= 1, 1 time within 1 minute'
+      # Account + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearchClusterName
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'ThreadpoolWriteRejected'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 1
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      OKActions:
+        - !Ref SNSTopic
+      AlarmActions:
+        - !Ref SNSTopic
+        
+  # -----------------
+  # CloudWatch Alarm - ThreadpoolSearchRejected 
+  # -----------------
+  ThreadpoolSearchRejected:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'ThreadpoolSearchRejected >= 1'
+      AlarmDescription: 'Email when ThreadpoolSearchRejected >= 1, 1 time within 1 minute'
+      # Account + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearchClusterName
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'ThreadpoolSearchRejected'
+      ComparisonOperator: GreaterThanOrEqualToThreshold   
+      Threshold: 1
+      Period: 60
+      EvaluationPeriods: 1
+      # Action
+      OKActions:
+        - !Ref SNSTopic
+      AlarmActions:
+        - !Ref SNSTopic
