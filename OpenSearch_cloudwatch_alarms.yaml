@@ -84,7 +84,7 @@ Resources:
     Properties:
       # Alarm name + description
       AlarmName: 'ClusterStatus.yellow >= 1'
-      AlarmDescription: 'Email when ClusterStatus.yellow >=1, 1 time within 1 minute'
+      AlarmDescription: 'Email when the domains status is yellow for 5 minutes or more'
       # Account + cluster
       Namespace: 'AWS/ES'
       Dimensions:
@@ -99,7 +99,7 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold   
       Threshold: 1
       Period: 60
-      EvaluationPeriods: 1
+      EvaluationPeriods: 5
       # Action
       OKActions:
         - !Ref SNSTopic
