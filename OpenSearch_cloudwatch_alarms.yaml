@@ -611,7 +611,7 @@ Resources:
           Value: 
             Ref: OpenSearchClusterName
       # Conditions
-      Statistic: Maximum
+      Statistic: Minimum
       MetricName: 'Nodes'
       ComparisonOperator: LessThanThreshold   
       Threshold: 
