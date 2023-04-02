@@ -7,6 +7,9 @@ Parameters:
   OpenSearchClusterName:
     Type: String
     Description: 'Name of OpenSearch domain'
+  NumberOfNodesInCluster:
+    Type: Integer
+    Description: 'Number of nodes in OpenSearch domain'
   IsOldGenInstancesMasterNode:
     Type: String
     Description: Are the master nodes previous generation instances? Select true if they are previous generation instances. Select false if they are current generation instances
@@ -583,6 +586,37 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold   
       Threshold: 1
       Period: 60
+      EvaluationPeriods: 1
+      # Action
+      OKActions:
+        - !Ref SNSTopic
+      AlarmActions:
+        - !Ref SNSTopic
+        
+  # -----------------
+  # CloudWatch Alarm - Nodes  
+  # -----------------
+  Nodes:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      # Alarm name + description
+      AlarmName: 'Nodes < NumberOfNodesInCluster, 1 time within 1 day'
+      AlarmDescription: 'Email when Nodes < NumberOfNodesInCluster (the number of nodes that are supposed to be in the cluster), 1 time within 1 day'
+      # Account + cluster
+      Namespace: 'AWS/ES'
+      Dimensions:
+        - Name: ClientId
+          Value: !Ref AWS::AccountId
+        - Name: DomainName
+          Value: 
+            Ref: OpenSearchClusterName
+      # Conditions
+      Statistic: Maximum
+      MetricName: 'Nodes'
+      ComparisonOperator: LessThanThreshold   
+      Threshold: 
+        Ref: NumberOfNodesInCluster
+      Period: 86400
       EvaluationPeriods: 1
       # Action
       OKActions:
