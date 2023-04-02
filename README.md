@@ -13,7 +13,7 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 | Metric name                    | Statistic | Period (second) | ComparisonOperator            | Threshold | EvaluationPeriods |
 |--------------------------------|-----------|-----------------| ------------------------------|-----------|-------------------|
 | ClusterStatus.red              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 | 
-| ClusterStatus.yellow           | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
+| ClusterStatus.yellow           | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 5                 |
 | FreeStorageSpace               | Minimum   | 60              | LessThanOrEqualToThreshold    | 20480     | 1                 |
 | ClusterIndexWritesBlocked      | Maximum   | 300             | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | AutomatedSnapshotFailure       | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
