@@ -311,7 +311,7 @@ Resources:
       MetricName: 'MasterJVMMemoryPressure'
       ComparisonOperator: GreaterThanOrEqualToThreshold   
       Threshold: !If [OldGenInstancesMasterNode, 80, 95]
-      Period: 900
+      Period: 60
       EvaluationPeriods: 1
       # Action
       OKActions:
