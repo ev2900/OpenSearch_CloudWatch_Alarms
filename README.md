@@ -18,8 +18,8 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 | ClusterIndexWritesBlocked      | Maximum   | 300             | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | AutomatedSnapshotFailure       | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | CPUUtilization                 | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 3                 |
-| JVMMemoryPressure              | Maximum   | 300             | GreaterThanOrEqualToThreshold | 95        | 3                 |
-| OldGenJVMMemoryPressure        | Maximum   | 300             | GreaterThanOrEqualToThreshold | 80        | 3                 |
+| JVMMemoryPressure              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 95        | 3                 |
+| OldGenJVMMemoryPressure        | Maximum   | 60              | GreaterThanOrEqualToThreshold | 80        | 3                 |
 | MasterCPUUtilization           | Maximum   | 900             | GreaterThanOrEqualToThreshold | 50        | 3                 |
 | MasterJVMMemoryPressure        | Maximum   | 900             | GreaterThanOrEqualToThreshold | 95        | 1                 |
 | MasterOldGenJVMMemoryPressure  | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 1                 |
