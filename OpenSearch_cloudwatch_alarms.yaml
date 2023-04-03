@@ -251,7 +251,7 @@ Resources:
       MetricName: 'JVMMemoryPressure'
       ComparisonOperator: GreaterThanOrEqualToThreshold   
       Threshold: !If [OldGenInstancesDataNode, 80, 95]
-      Period: 300
+      Period: 60
       EvaluationPeriods: 3
       # Action
       OKActions:
