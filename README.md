@@ -21,8 +21,8 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 | JVMMemoryPressure              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 95        | 3                 |
 | OldGenJVMMemoryPressure        | Maximum   | 60              | GreaterThanOrEqualToThreshold | 80        | 3                 |
 | MasterCPUUtilization           | Maximum   | 900             | GreaterThanOrEqualToThreshold | 50        | 3                 |
-| MasterJVMMemoryPressure        | Maximum   | 60              | GreaterThanOrEqualToThreshold | 95        | 1                 |
-| MasterOldGenJVMMemoryPressure  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 80        | 1                 |
+| MasterJVMMemoryPressure        | Maximum   | 60              | GreaterThanOrEqualToThreshold | 95        | 3                 |
+| MasterOldGenJVMMemoryPressure  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 80        | 3                 |
 | KMSKeyError                    | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | KMSKeyInaccessible             | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | Shards.active                  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |  
