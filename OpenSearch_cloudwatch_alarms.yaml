@@ -312,7 +312,7 @@ Resources:
       ComparisonOperator: GreaterThanOrEqualToThreshold   
       Threshold: !If [OldGenInstancesMasterNode, 80, 95]
       Period: 60
-      EvaluationPeriods: 1
+      EvaluationPeriods: 3
       # Action
       OKActions:
         - !Ref SNSTopic
@@ -408,10 +408,6 @@ Resources:
         - !Ref SNSTopic
       AlarmActions:
         - !Ref SNSTopic
-
-  # -----------------
-  # CloudWatch Alarm - 5xx alarms
-  # -----------------
 
   # -----------------
   # CloudWatch Alarm - MasterReachableFromNode
