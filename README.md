@@ -1,10 +1,10 @@
 # OpenSearch CloudWatch Alarms
 
-<img width="100" alt="map-user" src="https://img.shields.io/badge/downloads-120-blue">
+<img width="100" alt="map-user" src="https://img.shields.io/badge/downloads-117-blue">
 
-Deploying the CloudFormation Stack in this repository will create CloudWatch Alarms - that will trigger email alerts via. SNS notification - for the metrics documented in the table below. 
+Deploying the CloudFormation Stack in this repository will create CloudWatch Alarms - that will trigger email alerts via. SNS notification - for the metrics documented in the table below.
 
-To deploy the CloudWatch alarms click the button 
+To deploy the CloudWatch alarms click the button
 
 [![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=open-search-cloudwatch-alarms&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/OpenSearch_cloudwatch_alarms.yaml)
 
@@ -14,7 +14,7 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 
 | Metric name                    | Statistic | Period (second) | ComparisonOperator            | Threshold | EvaluationPeriods |
 |--------------------------------|-----------|-----------------| ------------------------------|-----------|-------------------|
-| ClusterStatus.red              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 | 
+| ClusterStatus.red              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | ClusterStatus.yellow           | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 5                 |
 | FreeStorageSpace               | Minimum   | 60              | LessThanOrEqualToThreshold    | 20480     | 1                 |
 | ClusterIndexWritesBlocked      | Maximum   | 300             | GreaterThanOrEqualToThreshold | 1         | 1                 |
@@ -27,7 +27,7 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 | MasterOldGenJVMMemoryPressure  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 80        | 3                 |
 | KMSKeyError                    | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
 | KMSKeyInaccessible             | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| Shards.active                  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |  
+| Shards.active                  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |
 | MasterReachableFromNode        | Maximum   | 86400           | LessThanThreshold             | 1         | 1                 |
 | ThreadpoolWriteQueue           | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
 | ThreadpoolSearchQueue          | Average   | 60              | GreaterThanOrEqualToThreshold | 500       | 1                 |
