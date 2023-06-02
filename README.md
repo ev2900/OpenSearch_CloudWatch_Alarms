@@ -1,5 +1,7 @@
 # OpenSearch CloudWatch Alarms
 
+<img width="100" alt="map-user" src="https://img.shields.io/badge/downloads-117-blue">
+
 Deploying the CloudFormation Stack in this repository will create CloudWatch Alarms - that will trigger email alerts via. SNS notification - for the metrics documented in the table below. 
 
 To deploy the CloudWatch alarms click the button 
