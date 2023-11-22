@@ -535,6 +535,7 @@ Resources:
   ThreadpoolWriteRejected:
     Type: AWS::CloudWatch::Alarm
     Properties:
+      AlarmName: 'DIFF(ThreadpoolWriteRejected) >= 1'
       Metrics:
         # Calculate the difference in threadpoolWriteRejected minute to minute
         - Expression: 'DIFF(threadpoolWriteRejected)'
@@ -572,6 +573,7 @@ Resources:
   ThreadpoolSearchRejected:
     Type: AWS::CloudWatch::Alarm
     Properties:
+      AlarmName: 'DIFF(ThreadpoolSearchRejected) >= 1'
       Metrics:
         # Calculate the difference in ThreadpoolSearchRejected minute to minute
         - Expression: 'DIFF(threadpoolSearchRejected)'
