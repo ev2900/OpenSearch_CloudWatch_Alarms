@@ -535,25 +535,32 @@ Resources:
   ThreadpoolWriteRejected:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      # Alarm name + description
-      AlarmName: 'ThreadpoolWriteRejected >= 1'
-      AlarmDescription: 'Email when ThreadpoolWriteRejected >= 1, 1 time within 1 minute'
-      # Account + cluster
-      Namespace: 'AWS/ES'
-      Dimensions:
-        - Name: ClientId
-          Value: !Ref AWS::AccountId
-        - Name: DomainName
-          Value: 
-            Ref: OpenSearchClusterName
-      # Conditions
-      Statistic: Maximum
-      MetricName: 'ThreadpoolWriteRejected'
-      ComparisonOperator: GreaterThanOrEqualToThreshold   
-      Threshold: 1
-      Period: 60
+      Metrics:
+        # Calculate the difference in threadpoolWriteRejected minute to minute
+        - Expression: 'DIFF(threadpoolWriteRejected)'
+          Id: 'dIFF_threadpoolWriteRejected'
+          Label: 'Difference in ThreadpoolWriteRejected'
+          ReturnData: true
+        # Get the SUM of the COUNT of ThreadpoolWriteRejected for each minute
+        - Id: 'threadpoolWriteRejected'
+          Label: 'ThreadpoolWriteRejected'
+          MetricStat:
+            Metric:
+              Dimensions:
+                - Name: ClientId
+                  Value: !Ref AWS::AccountId
+                - Name: DomainName
+                  Value: 
+                    Ref: OpenSearchClusterName
+              MetricName: 'ThreadpoolWriteRejected'
+              Namespace: 'AWS/ES'
+            Period: 60
+            Stat: 'Sum'
+            Unit: 'Count'
+          ReturnData: false
       EvaluationPeriods: 1
-      # Action
+      Threshold: 1
+      ComparisonOperator: GreaterThanThreshold
       OKActions:
         - !Ref SNSTopic
       AlarmActions:
@@ -565,30 +572,37 @@ Resources:
   ThreadpoolSearchRejected:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      # Alarm name + description
-      AlarmName: 'ThreadpoolSearchRejected >= 1'
-      AlarmDescription: 'Email when ThreadpoolSearchRejected >= 1, 1 time within 1 minute'
-      # Account + cluster
-      Namespace: 'AWS/ES'
-      Dimensions:
-        - Name: ClientId
-          Value: !Ref AWS::AccountId
-        - Name: DomainName
-          Value: 
-            Ref: OpenSearchClusterName
-      # Conditions
-      Statistic: Maximum
-      MetricName: 'ThreadpoolSearchRejected'
-      ComparisonOperator: GreaterThanOrEqualToThreshold   
-      Threshold: 1
-      Period: 60
+      Metrics:
+        # Calculate the difference in ThreadpoolSearchRejected minute to minute
+        - Expression: 'DIFF(threadpoolSearchRejected)'
+          Id: 'dIFF_threadpoolSearchRejected'
+          Label: 'Difference in ThreadpoolSearchRejected'
+          ReturnData: true
+          # Get the SUM of the COUNT of ThreadpoolSearchRejected for each minute
+        - Id: 'threadpoolSearchRejected'
+          Label: 'ThreadpoolSearchRejected'
+          MetricStat:
+            Metric:
+              Dimensions:
+                - Name: ClientId
+                  Value: !Ref AWS::AccountId
+                - Name: DomainName
+                  Value: 
+                    Ref: OpenSearchClusterName
+              MetricName: 'ThreadpoolSearchRejected'
+              Namespace: 'AWS/ES'
+            Period: 60
+            Stat: 'Sum'
+            Unit: 'Count'
+          ReturnData: false
       EvaluationPeriods: 1
-      # Action
+      Threshold: 1
+      ComparisonOperator: GreaterThanThreshold
       OKActions:
         - !Ref SNSTopic
       AlarmActions:
         - !Ref SNSTopic
-        
+    
   # -----------------
   # CloudWatch Alarm - Nodes  
   # -----------------
