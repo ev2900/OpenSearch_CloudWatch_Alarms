@@ -1,37 +1,76 @@
-# OpenSearch CloudWatch Alarms
+# OpenSearch Dashboard Nginx Proxy
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-293-blue">
+Amazon OpenSearch services can deploy a domain in a private VPC, subnet(s). Deploying OpenSearch in a private subnet blocks traffic to the OpenSearch dashboard via. the public internet.
 
-Deploying the CloudFormation Stack in this repository will create CloudWatch Alarms - that will trigger email alerts via. SNS notification - for the metrics documented in the table below.
+A Nginx proxy can be configured on an Ec2 in a public subnet (in the same VPC as the private subnet) to proxy traffic to the OpenSearch dashboard. **Enabling you to have a OpenSearch domain deployed in a private subnet with a OpenSearch dashboard accessible from the public internet**
 
-To deploy the CloudWatch alarms click the button
+Follow the instructions below
 
-[![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=open-search-cloudwatch-alarms&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/OpenSearch_cloudwatch_alarms.yaml)
+1. Run the CloudFormation stack below
 
-When prompted by CloudFormation enter the name of the OpenSearch domain to monitor and the email address you want notifications to be send to
+[![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=os-nginx&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/opensearch_nginx.yaml)
 
-[AWS documention](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cloudwatch-alarms.html) recomends these CloudWatch alarms as a means of monitoring an OpenSearch domain
+The resources created by the CloudFormation stack are documented in the architecture below
 
-| Metric name                    | Statistic | Period (second) | ComparisonOperator            | Threshold | EvaluationPeriods |
-|--------------------------------|-----------|-----------------| ------------------------------|-----------|-------------------|
-| ClusterStatus.red              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| ClusterStatus.yellow           | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 5                 |
-| FreeStorageSpace               | Minimum   | 60              | LessThanOrEqualToThreshold    | 20480     | 1                 |
-| ClusterIndexWritesBlocked      | Maximum   | 300             | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| AutomatedSnapshotFailure       | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| CPUUtilization                 | Maximum   | 900             | GreaterThanOrEqualToThreshold | 80        | 3                 |
-| JVMMemoryPressure              | Maximum   | 60              | GreaterThanOrEqualToThreshold | 95        | 3                 |
-| OldGenJVMMemoryPressure        | Maximum   | 60              | GreaterThanOrEqualToThreshold | 80        | 3                 |
-| MasterCPUUtilization           | Maximum   | 900             | GreaterThanOrEqualToThreshold | 50        | 3                 |
-| MasterJVMMemoryPressure        | Maximum   | 60              | GreaterThanOrEqualToThreshold | 95        | 3                 |
-| MasterOldGenJVMMemoryPressure  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 80        | 3                 |
-| KMSKeyError                    | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| KMSKeyInaccessible             | Maximum   | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| Shards.active                  | Maximum   | 60              | GreaterThanOrEqualToThreshold | 30000     | 1                 |
-| MasterReachableFromNode        | Maximum   | 86400           | LessThanThreshold             | 1         | 1                 |
-| ThreadpoolWriteQueue           | Average   | 60              | GreaterThanOrEqualToThreshold | 100       | 1                 |
-| ThreadpoolSearchQueue          | Average   | 60              | GreaterThanOrEqualToThreshold | 500       | 1                 |
-| ThreadpoolSearchQueue          | Maximum   | 60              | GreaterThanOrEqualToThreshold | 5000      | 1                 |
-| ThreadpoolWriteRejected        | SUM       | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| ThreadpoolSearchRejected       | SUM       | 60              | GreaterThanOrEqualToThreshold | 1         | 1                 |
-| Nodes                          | Minimum   | 86400           | LessThanThreshold             | 1         | 1                 |
+
+<img alt="opensearch_nginx_yaml" src="https://github.com/ev2900/OpenSearch_Dashboard_Nginx_Proxy/blob/main/Read_Me_Architecture/ReadMe_Architecture.png">
+
+2. Install NGINX on Ec2
+
+SSH into the Ec2 that was created by the cloudformation and run the following commands on the terminal.
+
+*Note* you will need to update the ec2 security group to allow incoming traffic from your IP address before you can SSH into the Ec2 instance.
+
+```sudo apt update```
+
+```sudo apt install nginx```
+
+## Create SSL self-signed certificate
+
+The OpenSearch dashboard URL uses https. Consequently we need to have SSL enabled in our Nginx proxy. We will generate a self-signed certificate to use as part of our SSL configuration.
+
+Run the following commands on the terminal of the Ec2 created by the cloudformation
+
+```cd /etc/nginx/```
+
+```sudo openssl genrsa -des3 -out /etc/nginx/private.key 2048```
+
+```sudo openssl rsa -in private.key -out public.key```
+
+```sudo openssl req -new -key public.key -out certificate_signing_request.csr```
+
+```sudo openssl x509 -req -days 365 -in certificate_signing_request.csr -signkey public.key -out self_signed_certificate.crt```
+
+3. Configure Nginx
+
+Run the following commands on the terminal of the Ec2 created by the cloudformation
+
+```cd sites-enabled```
+
+```sudo vim default```
+
+Delete all of the content in the default file. Update the 3 <os_domain_url> placeholders in the [ngnix_config](https://github.com/ev2900/OpenSearch_Dashboard_Nginx_Proxy/blob/main/ngnix_config) file. Copy/past the updated [ngnix_config](https://github.com/ev2900/OpenSearch_Dashboard_Nginx_Proxy/blob/main/ngnix_config) into the default file. Save and close the default file.
+
+4. Restart / start Nginx
+
+Restart the Nginx service to have the changes made to the configuration take effect. Run the following commands on the terminal of the Ec2 created by the cloudformation
+
+```sudo service nginx restart```
+
+If you need to stop or start Nginx issue the commands below as needed
+
+```sudo service nginx start```
+
+```sudo service nginx stop```
+
+5. Access OpenSearch dashboard via. public internet
+
+To access the OpenSearch dashboard ensure that the ec2 security group will accept incoming traffic for your source. In a web browser navigate to https://<ec2's-public-ip>/_dashboards
+
+Your web browser may flag the website as insecure. This is because we are using a self-signed SSL certificate instead of a SSL certificate signed by a trusted authority. Procced to the website. You will see the OpenSearch dashboard log in page.
+
+<img width="550" alt="log_in" src="https://user-images.githubusercontent.com/5414004/182025931-a0acec68-452f-441c-98f2-a091cfb04091.png">
+
+## Future Improvement(s)
+1. Containerize Nginx server
+2. High availability Nginx server (ie. two servers behind an elastic load balancer)
