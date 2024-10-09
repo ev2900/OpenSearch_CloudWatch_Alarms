@@ -281,7 +281,7 @@ Resources:
       MetricName: 'MasterCPUUtilization'
       ComparisonOperator: GreaterThanOrEqualToThreshold   
       Threshold: 50
-      Period: 900
+      Period: 300
       EvaluationPeriods: 3
       # Action
       OKActions:
