@@ -1,6 +1,6 @@
 # OpenSearch CloudWatch Alarms
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-657-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-8452-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-2932-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-657-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-8485-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-2932-green">
 
 Deploying the CloudFormation Stack in this repository will create CloudWatch Alarms - that will trigger email alerts via. SNS notification - for the metrics documented in the table below.
 
