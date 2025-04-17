@@ -38,5 +38,4 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 
 ## Planned Improvements  for this Repository
 1. Add metrics for codinator nodes
-2. Create a Teraform deployment of these metrics and alarms
-3. Add metrics for IOPS Throttles - this can help determine when to add provisioned IOPS to EBS volumes
+2. Add metrics for IOPS Throttles - this can help determine when to add provisioned IOPS to EBS volumes
