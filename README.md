@@ -2,9 +2,12 @@
 
 <img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-702-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-9027-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-3231-green">
 
-Deploying the CloudFormation Stack in this repository will create CloudWatch Alarms - that will trigger email alerts via. SNS notification - for the metrics documented in the table below.
+> [!NOTE]  
+> A Terraform deployment option is also available. You can find the required .tf file [HERE](https://github.com/ev2900/OpenSearch_CloudWatch_Alarms/blob/main/OpenSearch_cloudwatch_alarms.tf)
 
-To deploy the CloudWatch alarms click the button
+Deploying the CloudFormation / Terraform in this repository will create CloudWatch Alarms - that will trigger email alerts via. SNS notification - for the metrics documented in the table below.
+
+To deploy the CloudWatch alarms via. CloudFormation click the button
 
 [![Launch CloudFormation Stack](https://sharkech-public.s3.amazonaws.com/misc-public/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=open-search-cloudwatch-alarms&templateURL=https://sharkech-public.s3.amazonaws.com/misc-public/OpenSearch_cloudwatch_alarms.yaml)
 
