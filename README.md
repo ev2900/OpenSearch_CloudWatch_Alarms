@@ -42,3 +42,6 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 ## Planned Improvements  for this Repository
 1. Add alarm for [IOPS Throttle](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-cluster-metrics) | Maximum | 300 seconds | GreaterThanOrEqualToThreshold | 1 | 2 
 2. Add alarm for [Throughput Throttle](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-cluster-metrics) | Maximum | 300 seconds | GreaterThanOrEqualToThreshold | 1 | 2
+3. Add alarm for [ReadThroughputMicroBursting](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-master-ebs-metrics) + [WriteThroughputMicroBursting](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-master-ebs-metrics) | SUM ReadThroughputMicroBursting + WriteThroughputMicroBursting | 300 | GreaterThan | Provisioned Throughput of EBS volume(s) | 2
+4. Simply user inputs to their email and cluster ARN. Automaticlly get the other required cluster information using the ARN
+5. Add alarms for metrics of the dedicated cordinator nodes
