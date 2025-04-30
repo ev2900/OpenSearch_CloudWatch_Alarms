@@ -40,5 +40,5 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 | Nodes                          | Minimum   | 86400           | LessThanThreshold             | 1         | 1                 |
 
 ## Planned Improvements  for this Repository
-1. Add metrics for codinator nodes
-2. Add metrics for IOPS Throttles - this can help determine when to add provisioned IOPS to EBS volumes
+1. Add alarm for [IOPS Throttle](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-cluster-metrics) | Maximum | 300 seconds | GreaterThanOrEqualToThreshold | 1 | 2 
+2. Add alarm for [Throughput Throttle](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-cluster-metrics) | Maximum | 300 seconds | GreaterThanOrEqualToThreshold | 1 | 2
