@@ -1,6 +1,6 @@
 # OpenSearch CloudWatch Alarms
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-708-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-9094-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-3253-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-715-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-9094-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-3253-green">
 
 > [!NOTE]
 > A Terraform deployment option is also available. You can find the required .tf file [HERE](https://github.com/ev2900/OpenSearch_CloudWatch_Alarms/blob/main/OpenSearch_cloudwatch_alarms.tf)
@@ -40,7 +40,7 @@ When prompted by CloudFormation enter the name of the OpenSearch domain to monit
 | Nodes                          | Minimum   | 86400           | LessThanThreshold             | 1         | 1                 |
 
 ## Planned Improvements  for this Repository
-1. Add alarm for [IOPS Throttle](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-cluster-metrics) | Maximum | 300 seconds | GreaterThanOrEqualToThreshold | 1 | 2 
+1. Add alarm for [IOPS Throttle](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-cluster-metrics) | Maximum | 300 seconds | GreaterThanOrEqualToThreshold | 1 | 2
 2. Add alarm for [Throughput Throttle](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-cluster-metrics) | Maximum | 300 seconds | GreaterThanOrEqualToThreshold | 1 | 2
 3. Add alarm for [ReadThroughputMicroBursting](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-master-ebs-metrics) + [WriteThroughputMicroBursting](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-cloudwatchmetrics.html#managedomains-cloudwatchmetrics-master-ebs-metrics) | SUM ReadThroughputMicroBursting + WriteThroughputMicroBursting | 300 | GreaterThan | Provisioned Throughput of EBS volume(s) | 2
 4. Simply user inputs to their email and cluster ARN. Automaticlly get the other required cluster information using the ARN
