@@ -1,6 +1,6 @@
 # OpenSearch CloudWatch Alarms
 
-<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-788-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-10425-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-3823-green">
+<img width="275" alt="map-user" src="https://img.shields.io/badge/cloudformation template deployments-788-blue"> <img width="85" alt="map-user" src="https://img.shields.io/badge/views-10425-green"> <img width="125" alt="map-user" src="https://img.shields.io/badge/unique visits-3874-green">
 
 > [!NOTE]
 > A Terraform deployment option is also available. You can find the required .tf file [HERE](https://github.com/ev2900/OpenSearch_CloudWatch_Alarms/blob/main/OpenSearch_cloudwatch_alarms.tf)
